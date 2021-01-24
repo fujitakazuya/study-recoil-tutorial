@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { atom, useRecoilState } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -16,7 +15,7 @@ export const todoListState = atom<TodoItemType[]>({
 export const useTodoList = () => {
   const [todoList, setTodoList] = useRecoilState(todoListState)
 
-  const addItem = useCallback((inputValue: string) => {
+  const addItem = (inputValue: string) => {
     setTodoList((oldTodoList) => [
       ...oldTodoList,
       {
@@ -25,8 +24,7 @@ export const useTodoList = () => {
         isComplete: false,
       },
     ])
-    console.log(todoList)
-  },[])
+  }
 
   const editItemText = (item: TodoItemType, id: string, value: string) => {
     const newList = replaceItemAtIndex(todoList, id, {
